@@ -31,7 +31,7 @@ Plugin 'integralist/vim-mypy', {'for': ['python', 'py']}
 Plugin 'zchee/deoplete-jedi', {'for': ['python', 'py']}
 
 Plugin 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': ['md', 'markdown'] }
-Plugin 'dhruvasagar/vim-table-mode' {'for': ['markdown', 'md']}
+Plugin 'dhruvasagar/vim-table-mode', {'for': ['markdown', 'md']}
 
 Plugin 'Quramy/tsuquyomi', {'for': ['typescript', 'ts']} " might require vimproc
 Plugin 'leafgarland/typescript-vim', {'for': ['typescript', 'ts']}
