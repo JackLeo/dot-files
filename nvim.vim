@@ -1,55 +1,57 @@
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" Required:
-set runtimepath+=/home/domas/.cache/dein/repos/github.com/Shougo/dein.vim
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-" Required:
-if dein#load_state('/home/domas/.cache/dein')
-  call dein#begin('/home/domas/.cache/dein')
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('/home/domas/.cache/dein/repos/github.com/Shougo/dein.vim')
+Plugin 'morhetz/gruvbox'
+Plugin 'vim-airline/vim-airline'
+Plugin 'ryanoasis/vim-devicons'
 
-  call dein#add('Shougo/denite.nvim')
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'ludovicchabant/vim-gutentags'
 
-  "call dein#add('roxma/nvim-completion-manager')
-  "call dein#add('jsfaint/gen_tags.vim')
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('ludovicchabant/vim-gutentags')
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'Shougo/deoplete-zsh'
+Plugin 'zchee/deoplete-go', {'for': 'go'}
 
-  call dein#add('zchee/deoplete-jedi')
-  call dein#add('Shougo/deoplete-zsh')
-  call dein#add('zchee/deoplete-go')
+Plugin 'python-mode/python-mode', {'for': ['python', 'py']}
+Plugin 'integralist/vim-mypy', {'for': ['python', 'py']}
+Plugin 'zchee/deoplete-jedi', {'for': ['python', 'py']}
 
-  call dein#add('klen/python-mode')
-  call dein#add('ehamberg/vim-cute-python')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('scrooloose/syntastic')
-  call dein#add('scrooloose/nerdcommenter')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('dhruvasagar/vim-table-mode')
+Plugin 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': ['md', 'markdown'] }
+Plugin 'dhruvasagar/vim-table-mode' {'for': ['markdown', 'md']}
 
-  call dein#add('fatih/vim-go')
-  call dein#add('janko-m/vim-test')
+Plugin 'Quramy/tsuquyomi', {'for': ['typescript', 'ts']} " might require vimproc
+Plugin 'leafgarland/typescript-vim', {'for': ['typescript', 'ts']}
+Plugin 'Quramy/vim-js-pretty-template', {'for': ['js', 'javascript', 'typescript', 'ts']}
 
-  call dein#add('morhetz/gruvbox')
+Plugin 'janko-m/vim-test'
 
-  call dein#add('euclio/vim-markdown-composer', {'build': 'cargo build --release'})
-  call dein#add('Rykka/riv.vim')
-
-  call dein#end()
-  call dein#save_state()
-endif
-
-filetype plugin indent on
-syntax enable
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 " VIM behaviour ========================================================== {{{
 
@@ -192,12 +194,6 @@ syntax enable
     " Clean search highlight on space
     nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
-    " Simple Copy to system clipboard
-    vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
-
-    " Simple paste in insert mode
-    imap <C-v> <Esc><C-v>a
-
     " Insert new line after the cursor
     nmap <CR> i<Enter><Esc>l
 
@@ -230,12 +226,6 @@ syntax enable
 
     " Terminal init
     nmap <leader>t :terminal<cr>
-
-    " Denite
-    nnoremap <C-o> :Denite -auto-resize file_rec<cr>
-    nnoremap <C-O> :DeniteBufferDir -auto-resize file_rec<cr>
-    nnoremap <leader>/ :Denite -auto-resize grep:.<cr>
-    nnoremap <leader>s :Denite -auto-resize buffer<cr>
 
     " Tab Complete
     inoremap <expr><tab> pumvisible()? "\<c-n>" : "\<tab>"
@@ -304,8 +294,5 @@ syntax enable
       \   nnoremap <buffer> .. :edit %:h<CR> |
       \ endif
     autocmd BufReadPost fugitive://* set bufhidden=delete
-
-    " Python mode
-    let g:pymode_python = 'python2'
 
 " }}}
